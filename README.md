@@ -1,10 +1,11 @@
 # Django-project-starter
 
-The is a django project starter. Contains basic functionality. 
+The is a django project starter. Contains basic functionality.
 
 ## Installation
 
 After cloning all files and folders create a `.env` file with following details at root level.
+
 ```
 # Project
 PROJECT_NAME="ProjectName"
@@ -28,19 +29,20 @@ PGADMIN_DEFAULT_PASSWORD=yourpassword
 # Secret Key in base.py
 SECRET_KEY=yourdjangosecretkey
 ```
+`backendenv` is the virtual environment. You can create you own virtual environment. And run it with `.\backendenv\bin\activate` on windows or `source backendenv/bin/activate` on Mac/Linux.
 
 Run `docker compose up`
-
 
 - `demoapp` is an starter app that gives basic concept of django app with CRUD and token authentication.
 
 To generate your app start with `django startapp <appname>`
 
-
 # Coding Convention
-I would first read Linus's coding style [Link](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://slurm.schedmd.com/coding_style.pdf)
+
+I would first read Linus's coding style [Link](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/<https://slurm.schedmd.com/coding_style.pdf)>
 For HTML/CSS I would go through this [link](https://google.github.io/styleguide/htmlcssguide.html#Background)
 If you are using any JS fw for frontend you can read this [link](https://github.com/ryanmcdermott/clean-code-javascript)
 
 # Remember
-- Formatting of code is done with `black` package from PyPi, Install `pip install black` and run `black {source_file_or_folder}` remember to push to main after formatting. 
+
+- Formatting of code is done with `black` package from PyPi, Your environment should have the package. Just run `black {source_file_or_folder}` remember to push to main after formatting.
