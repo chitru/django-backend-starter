@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    TimeBilling
+{% endblock title %}
+
+{% load rest_framework %}
+
+{% block content %}
+    <h2>Your available api's are</h2>
+    <br/>
+    {% if user.is_authenticated %}
+        <p>Howdy, {{ user.username }}, </p>
+        <p>Here are your endpoints </p>
+        <a href="http://localhost:8000/api/">/</a>
+    {% else %}
+        Login <a href="http://localhost:8000/admin" target="_blank">here</a> 
+    {% endif %}
+    <br/>
+
+
+
+{% endblock content %}

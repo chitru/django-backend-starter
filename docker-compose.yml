@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  backend:
+    image: python:3.8
+    ports:
+      - 8000:8000
+    restart: always
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1 # Prevents Python from writing pyc files to disc (equivalent to python -B option)
+      - PYTHONUNBUFFERED=1 # Prevents Python from buffering stdout and stderr (equivalent to python -u option)
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER} 
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - SECRET_KEY=${SECRET_KEY}
+    entrypoint: ["/bin/bash", "backend/scripts/docker-entrypoint.sh"]
+    volumes:
+      - ./:/backend
+    networks:
+      - spectrum_network
+    depends_on:
+      - postgres
+      - pgadmin
+
+  postgres:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    restart: always
+    environment: 
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER} 
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - spectrum_network
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    ports: 
+      - 8080:80
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    networks:
+      - spectrum_network
+    depends_on:
+      - postgres
+    
+networks:
+  spectrum_network:
+    driver: bridge
+
+volumes:
+  postgres_data: 
+    driver: local
